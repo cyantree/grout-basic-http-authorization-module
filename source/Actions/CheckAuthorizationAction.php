@@ -1,8 +1,11 @@
 <?php
 namespace Grout\Cyantree\BasicHttpAuthorizationModule\Actions;
 
+use Cyantree\Grout\App\Task;
+
 class CheckAuthorizationAction
 {
+    /** @var Task */
     public $task;
     public $module;
 
@@ -18,7 +21,7 @@ class CheckAuthorizationAction
                 return $this->username === $this->task->request->server->get('PHP_AUTH_USER') &&
                 $this->password === $this->task->request->server->get('PHP_AUTH_PW');
             }else{
-                $authorization = $this->task->request->get->get('Grout_Authorization');
+                $authorization = $this->task->request->config->get('Grout_Authorization');
 
                 if (preg_match('@^Basic (.+)$@', $authorization, $authorization)) {
                     $access = base64_decode($authorization[1]);
