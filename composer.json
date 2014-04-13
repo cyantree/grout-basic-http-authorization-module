@@ -1,0 +1,23 @@
+{
+    "name": "cyantree/grout-basic-http-authorization-module",
+    "version": "1.0",
+    "type": "grout-module",
+    "description": "module for implementing a basic http authorization",
+    "keywords": ["grout", "security", "htaccess", "auth"],
+    "homepage": "https://github.com/cyantree/grout-basic-http-authorization-module",
+    "license": "LGPL-3.0",
+    "authors": [
+        {"name": "Christoph Schreiber", "email": "mail@cyantree.com"}
+    ],
+    "autoload": {
+        "psr-4": {
+            "Grout\\Cyantree\\BasicHttpAuthorizationModule\\": ["", "source/"]
+        }
+    },
+    "require": {
+        "cyantree/grout": "1.*"
+    },
+    "extra": {
+        "grout-module-name": "Cyantree/BasicHttpAuthorizationModule"
+    }
+}
