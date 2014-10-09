@@ -19,7 +19,7 @@ class BasicHttpAuthorizationModule extends Module
         /** @var BasicHttpAuthorizationConfig moduleConfig */
         $this->moduleConfig = $this->app->configs->getConfig($this->id);
 
-        foreach($this->moduleConfig->urls as $url){
+        foreach ($this->moduleConfig->urls as $url) {
             $this->secureUrl($url);
         }
     }
@@ -33,15 +33,17 @@ class BasicHttpAuthorizationModule extends Module
         $secured = $page->data->get('secured');
         $whitelisted = $task->data->get('whitelistedByBasicHttpAuthorization');
 
-        if($secured){
-            if($whitelisted){
+        if ($secured) {
+            if ($whitelisted) {
                 return false;
-            }else{
+
+            } else {
                 $a = new CheckAuthorizationAction();
-                if($page->data->get('username')){
+                if ($page->data->get('username')) {
                     $a->username = $page->data->get('username');
                     $a->password = $page->data->get('password');
-                }else{
+
+                } else {
                     $a->username = $this->moduleConfig->username;
                     $a->password = $this->moduleConfig->password;
                 }
@@ -50,7 +52,8 @@ class BasicHttpAuthorizationModule extends Module
                 $a->module = $this;
                 return !$a->execute();
             }
-        }else if($secured === false){
+
+        } elseif ($secured === false) {
             $task->data->set('whitelistedByBasicHttpAuthorization', true);
 
             return false;

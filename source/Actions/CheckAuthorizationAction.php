@@ -14,13 +14,15 @@ class CheckAuthorizationAction
 
     public function execute()
     {
-        if($this->username === null || $this->password === null){
+        if ($this->username === null || $this->password === null) {
             return false;
-        }else{
-            if($this->task->request->server->has('PHP_AUTH_PW')){
+
+        } else {
+            if ($this->task->request->server->has('PHP_AUTH_PW')) {
                 return $this->username === $this->task->request->server->get('PHP_AUTH_USER') &&
                 $this->password === $this->task->request->server->get('PHP_AUTH_PW');
-            }else{
+
+            } else {
                 $authorization = $this->task->request->config->get('Grout_Authorization');
 
                 if (preg_match('@^Basic (.+)$@', $authorization, $authorization)) {
