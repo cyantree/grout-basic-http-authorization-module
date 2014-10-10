@@ -65,7 +65,11 @@ class BasicHttpAuthorizationModule extends Module
 
     public function secureUrl($url, $username = null, $password = null, $name = null)
     {
-        $this->addRoute($url, 'Pages\SecuredPage', array('secured' => true, 'username' => $username, 'password' => $password, 'name' => $name));
+        $this->addRoute(
+            $url,
+            'Pages\SecuredPage',
+            array('secured' => true, 'username' => $username, 'password' => $password, 'name' => $name)
+        );
     }
 
     public function whitelistUrl($url)
