@@ -24,13 +24,9 @@ class BasicHttpAuthorizationModule extends Module
         }
     }
 
-    /**
-     * @param Task $task
-     * @param Route $page
-     */
-    public function routeRetrieved($task, $page)
+    public function routeRetrieved(Task $task, Route $route)
     {
-        $secured = $page->data->get('secured');
+        $secured = $route->data->get('secured');
         $whitelisted = $task->data->get('whitelistedByBasicHttpAuthorization');
 
         if ($secured) {
@@ -39,9 +35,9 @@ class BasicHttpAuthorizationModule extends Module
 
             } else {
                 $a = new CheckAuthorizationAction();
-                if ($page->data->get('username')) {
-                    $a->username = $page->data->get('username');
-                    $a->password = $page->data->get('password');
+                if ($route->data->get('username')) {
+                    $a->username = $route->data->get('username');
+                    $a->password = $route->data->get('password');
 
                 } else {
                     $a->username = $this->moduleConfig->username;
